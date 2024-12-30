@@ -1,0 +1,55 @@
+# Binaries for programs and plugins
+*.exe
+*.dll
+*.so
+*.dylib
+
+# Go build artifacts
+*.out
+*.test
+
+# Dependency directories (vendor/)
+vendor/
+
+# Test results
+*.cover
+*.cov
+*.prof
+profile.out
+
+# Logs and temporary files
+*.log
+*.tmp
+*.swp
+
+# IDE and editor files
+.vscode/
+.idea/
+*.iml
+
+# OS-generated files
+.DS_Store
+Thumbs.db
+ehthumbs.db
+
+# Go module files
+go.sum
+
+# Build artifacts from Docker
+docker-compose.override.yml
+*.env
+
+# Files generated during development or testing
+*.sqlite3
+*.db
+.mocks/
+coverage/
+
+# Git hooks
+.hooks/
+
+# Node.js dependencies (if frontend exists in the repo)
+node_modules/
+
+# Generated code
+gen/
