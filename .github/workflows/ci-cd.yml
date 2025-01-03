@@ -28,6 +28,11 @@ jobs:
             ~/go/pkg/mod
           key: ${{ runner.os }}-go-${{ hashFiles('**/go.sum') }}
 
+      - name: Install dependencies
+        run: |
+          go mod tidy
+          go mod download
+
       - name: Run tests
         run: |
           make test
