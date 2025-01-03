@@ -36,7 +36,7 @@ func (s *Server) GetUser(w http.ResponseWriter, r *http.Request) {
 	}{}
 
 	if err := json.NewDecoder(r.Body).Decode(&idReq); err != nil {
-		log.Fatalf("error parsing json id request: %w", err)
+		log.Fatalf("error parsing json id request: %v", err)
 		return
 	}
 
@@ -50,9 +50,9 @@ func (s *Server) GetUser(w http.ResponseWriter, r *http.Request) {
 
 	row := s.db.QueryRow("select * from users where id=" + fmt.Sprint(idReq.ID))
 	u := &User{}
-	err := row.Scan(u.ID, u.Name)
+	err := row.Scan(&u.ID, &u.Name)
 	if err != nil {
-		log.Fatalf("scan user: %w", err)
+		log.Fatalf("scan user: %v", err)
 		return
 	}
 
@@ -67,13 +67,15 @@ func (s *Server) CreateUser(writer http.ResponseWriter, request *http.Request) {
 	}{}
 
 	if err := json.NewDecoder(request.Body).Decode(&createUserReq); err != nil {
-		log.Fatalf("error parsing json id request: %w", err)
+		log.Fatalf("error parsing json id request: %v", err)
 		return
 	}
 
-	_, err := s.db.ExecContext(context.Background(), "insert into users set name="+createUserReq.Name)
+	query := "INSERT INTO users (name) VALUES (?)"
+	_, err := s.db.ExecContext(context.Background(), query, createUserReq.Name)
+	// _, err := s.db.ExecContext(context.Background(), "insert into users set name="+createUserReq.Name)
 	if err != nil {
-		log.Fatalf("insert user: %w", err)
+		log.Fatalf("insert user: %v", err)
 		return
 	}
 
