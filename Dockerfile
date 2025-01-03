@@ -12,7 +12,9 @@ COPY go.mod go.sum ./
 
 RUN go mod download
 
-RUN go install github.com/pressly/goose/v3/cmd/goose@latest && ls -l /go/bin
+# Install goose using a precompiled binary
+RUN curl -L -o /go/bin/goose https://github.com/pressly/goose/releases/latest/download/goose_linux_x86_64 && \
+    chmod +x /go/bin/goose
 
 COPY . .
 
