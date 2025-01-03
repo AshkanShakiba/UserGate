@@ -12,10 +12,13 @@ test:
 	go test ./... -v
 
 docker-build:
-	docker build -t ashkanshakiba/usergate .
+	docker build -t ghcr.io/${GITHUB_REPOSITORY}/usergate:latest .
+
+docker-push:
+	docker push ghcr.io/${GITHUB_REPOSITORY}/usergate:latest
 
 docker-run:
-	docker-compose up
+	docker-compose up --build
 
 migrate-up:
 	goose -dir ./db/migrations mysql $(DB_DSN) up
