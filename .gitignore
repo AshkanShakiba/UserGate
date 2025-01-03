@@ -32,9 +32,6 @@ profile.out
 Thumbs.db
 ehthumbs.db
 
-# Go module files
-go.sum
-
 # Build artifacts from Docker
 docker-compose.override.yml
 *.env
