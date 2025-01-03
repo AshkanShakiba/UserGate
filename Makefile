@@ -11,6 +11,12 @@ build:
 test:
 	go test ./... -v
 
+docker-build:
+	docker build -t ashkanshakiba/usergate .
+
+docker-run:
+	docker-compose up
+
 migrate-up:
 	goose -dir ./db/migrations mysql $(DB_DSN) up
 
