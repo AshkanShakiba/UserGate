@@ -1,8 +1,6 @@
-# Load environment variables from .env file
-include .env
+-include .env
 export $(shell sed 's/=.*//' .env)
 
-# Define database DSN dynamically using environment variables
 DB_DSN := "$(DB_USER):$(DB_PASSWORD)@tcp($(DB_HOST):$(DB_PORT))/$(DB_NAME)"
 
 build:
